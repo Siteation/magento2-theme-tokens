@@ -18,8 +18,9 @@ class ParserOptions implements OptionSourceInterface
     public function toOptionArray(): array
     {
         $options = [
-            "json" => "JSON",
-            "design_system" => "Design System (Figma, Sketch...)"
+            "raw" => "CSS Variables",
+            "json" => "JSON Tokens",
+            "design_system" => "Design System Tokens"
         ];
 
         return $options;
