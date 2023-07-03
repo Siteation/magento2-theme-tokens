@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "license": "MIT",
   "type": "magento2-module",
-  "description": "Ciustomize your theme with ease with Design Tokens (CSS props)",
+  "description": "Customize your theme with ease with Design Tokens (CSS props)",
   "readme": "README.md",
   "keywords": [
     "magento2",
     "magento2-module",
     "magento2-hyva",
     "design-tokens",
-    "css-props"
+    "css-props",
+    "css-variables"
   ],
   "authors": [
     {
