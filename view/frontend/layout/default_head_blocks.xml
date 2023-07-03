@@ -6,8 +6,8 @@
     <body>
         <referenceBlock name="head.additional">
             <block
-                name="siteation.storeinfo.tokens"
-                template="Siteation_StoreInfoTokens::tokens.phtml"
+                name="siteation.theme.tokens.head"
+                template="Siteation_ThemeTokens::head.phtml"
             />
         </referenceBlock>
     </body>
