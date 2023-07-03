@@ -1,14 +1,16 @@
 <?php declare(strict_types=1);
 
+use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Escaper;
 use Siteation\ThemeTokens\ViewModel\ThemeTokens;
 
+/** @var ViewModelRegistry $viewModels */
 /** @var Template $block */
 /** @var Escaper $escaper */
 
 /** @var ThemeTokens $themeTokens */
-$themeTokens = $block->getData('viewModelThemeTokens');
+$themeTokens = $viewModels->require(ThemeTokens::class);
 ?>
 
 <?php if($themeTokens->cssProps()): ?>

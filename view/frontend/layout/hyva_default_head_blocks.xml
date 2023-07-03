@@ -7,13 +7,8 @@
         <referenceBlock name="head.additional">
             <block
                 name="siteation.theme.tokens.head"
-                template="Siteation_ThemeTokens::head.phtml"
-            >
-                <arguments>
-                    <argument name="viewModelThemeTokens"
-                        xsi:type="object">Siteation\ThemeTokens\ViewModel\ThemeTokens</argument>
-                </arguments>
-            </block>
+                template="Siteation_ThemeTokens::hyva/head.phtml"
+            />
         </referenceBlock>
     </body>
 </page>
