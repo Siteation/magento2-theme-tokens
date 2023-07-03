@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd"
+>
+    <system>
+        <tab id="siteation" sortOrder="999" translate="label">
+            <label>Siteation</label>
+        </tab>
+
+        <section
+            id="siteation_storeinfo_tokens"
+            translate="label"
+            type="text"
+            sortOrder="400"
+            showInDefault="1"
+            showInWebsite="1"
+            showInStore="1"
+        >
+            <label>Design Tokens</label>
+            <tab>siteation</tab>
+            <resource>Magento_Config::tokens</resource>
+            <group
+                id="tokens"
+                translate="label"
+                type="text"
+                sortOrder="1"
+                showInDefault="1"
+                showInWebsite="1"
+                showInStore="1"
+            >
+                <label>Design Tokens</label>
+                <field
+                    id="tokens_syntax"
+                    translate="label"
+                    type="select"
+                    sortOrder="10"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                    canRestore="1"
+                >
+                    <label>Parser</label>
+                    <source_model>Siteation\StoreInfoTokens\Model\Config\ParserOptions</source_model>
+                    <comment>This option will determen how the the JSON is parsed</comment>
+                </field>
+                <field
+                    id="tokens"
+                    translate="label"
+                    type="textarea"
+                    sortOrder="20"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Tokens</label>
+                    <comment>Please make sure the JSON is valid, to check the if this is valid, go to
+                        https://www.jsonschemavalidator.net/</comment>
+                    <validate>validate-no-html-tags</validate>
+                </field>
+                <field
+                    id="tokens_importer"
+                    translate="label"
+                    type="note"
+                    sortOrder="22"
+                    showInDefault="1"
+                    showInWebsite="1"
+                    showInStore="1"
+                >
+                    <label>Import JSON</label>
+                    <frontend_model>Siteation\StoreInfoTokens\Block\Adminhtml\System\Config\ImportJson</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
