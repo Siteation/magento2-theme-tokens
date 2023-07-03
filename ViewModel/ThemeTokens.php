@@ -8,15 +8,15 @@ declare(strict_types=1);
  * @license MIT
  */
 
-namespace Siteation\StoreInfoTokens\ViewModel;
+namespace Siteation\ThemeTokens\ViewModel;
 
-use Siteation\StoreInfoTokens\Model\ObjectHelper;
-use Siteation\StoreInfoTokens\Model\Parser\DesignSystem;
+use Siteation\ThemeTokens\Model\ObjectHelper;
+use Siteation\ThemeTokens\Model\Parser\DesignSystem;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
-class StoreInfoTokens implements ArgumentInterface
+class ThemeTokens implements ArgumentInterface
 {
     protected $scopeConfig;
     protected $objectHelper;
@@ -38,20 +38,20 @@ class StoreInfoTokens implements ArgumentInterface
      * @param string $attribute
      * @return mixed
      */
-    public function getStoreInfoDesignTokens(string $attribute)
+    public function getThemeTokensConfig(string $attribute)
     {
-        $path = sprintf('siteation_storeinfo_tokens/tokens/%s', $attribute);
+        $path = sprintf('siteation_themetokens/general/%s', $attribute);
         return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
     }
 
     public function getTokens(): string
     {
-        return (string) $this->getStoreInfoDesignTokens('tokens');
+        return (string) $this->getThemeTokensConfig('tokens');
     }
 
     private function getTokensSyntax(): string
     {
-        return (string) $this->getStoreInfoDesignTokens('tokens_syntax');
+        return (string) $this->getThemeTokensConfig('token_syntax');
     }
 
     /**
@@ -130,27 +130,40 @@ class StoreInfoTokens implements ArgumentInterface
      * @param string $json
      * @return string
      */
-    public function autoTokens($json)
+    public function flattenString($string)
     {
-        if (!$this->validateJson($json)) {
-            return '';
-        };
-
-        $lines = explode(PHP_EOL, $json);
-        $formattedJson = '';
+        $lines = explode(PHP_EOL, $string);
+        $flatString = '';
         foreach ($lines as $line) {
             $trimmedLine = trim($line);
             if (!empty($trimmedLine)) {
-                $formattedJson .= $trimmedLine;
+                $flatString .= $trimmedLine;
             }
         }
 
-        $jsonTokens = json_decode($formattedJson, true);
-        $tokens = [];
-        if ($this->getTokensSyntax() === "design_system") {
+        return $flatString;
+    }
+
+    /**
+     * @param string $input
+     * @param string $syntax options: raw, json, design_system
+     * @return string
+     */
+    public function convertToCSSProps($input, $syntax = "json")
+    {
+        if ($syntax === "raw") {
+            return $this->flattenString($input);
+        }
+
+        if (!$this->validateJson($input)) {
+            return '';
+        };
+
+        $jsonTokens = json_decode($this->flattenString($input), true);
+        $tokens = $jsonTokens;
+
+        if ($syntax === "design_system") {
             $tokens = $this->parserDesignSystem->createTokens($jsonTokens);
-        } else {
-            $tokens = $jsonTokens;
         }
 
         $flattenedTokens = $this->objectHelper->flattenObj($tokens);
@@ -162,11 +175,20 @@ class StoreInfoTokens implements ArgumentInterface
             $styleString .= "$name: $value;";
         }
 
-        return $styleString ? ":root {{$styleString}}" : "";
+        return $styleString;
     }
 
     public function cssProps()
     {
-        return $this->autoTokens($this->getTokens());
+        $tokens = $this->convertToCSSProps(
+            $this->getTokens(),
+            $this->getTokensSyntax()
+        );
+
+        if ($tokens) {
+            return ":root {{$tokens}}";
+        }
+
+        return '';
     }
 }

@@ -6,9 +6,9 @@
  * @license MIT
  */
 
-namespace Siteation\StoreInfoTokens\Model\Parser;
+namespace Siteation\ThemeTokens\Model\Parser;
 
-use Siteation\StoreInfoTokens\Model\ObjectHelper;
+use Siteation\ThemeTokens\Model\ObjectHelper;
 
 class DesignSystem
 {

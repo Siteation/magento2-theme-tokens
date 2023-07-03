@@ -4,10 +4,10 @@
     xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd"
 >
     <default>
-        <siteation_storeinfo_tokens>
-            <tokens>
-                <tokens_syntax>json</tokens_syntax>
-            </tokens>
-        </siteation_storeinfo_tokens>
+        <siteation_themetokens>
+            <general>
+                <token_syntax>json</token_syntax>
+            </general>
+        </siteation_themetokens>
     </default>
 </config>

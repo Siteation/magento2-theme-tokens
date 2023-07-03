@@ -6,7 +6,7 @@
  * @license MIT
  */
 
-namespace Siteation\StoreInfoTokens\Model\Config;
+namespace Siteation\ThemeTokens\Model\Config;
 
 use Magento\Framework\Data\OptionSourceInterface;
 

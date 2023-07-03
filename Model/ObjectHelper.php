@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @license MIT
  */
 
-namespace Siteation\StoreInfoTokens\Model;
+namespace Siteation\ThemeTokens\Model;
 
 class ObjectHelper
 {

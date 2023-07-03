@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd"
 >
-    <module name="Siteation_StoreInfoTokens">
+    <module name="Siteation_ThemeTokens">
         <sequence>
             <module name="Magento_Directory"/>
             <module name="Magento_Store"/>
