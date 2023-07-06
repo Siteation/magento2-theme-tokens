@@ -12,7 +12,7 @@ use Siteation\ThemeTokens\Model\ObjectHelper;
 
 class DesignSystem
 {
-    protected $objectHelper;
+    protected ObjectHelper $objectHelper;
 
     public function __construct(ObjectHelper $objectHelper)
     {
@@ -26,7 +26,7 @@ class DesignSystem
      * @param string $keyToKeep - key to keep in the object
      * @return array - Same Object with only the selected key
      */
-    private function removeAllExceptValue($obj, $keyToKeep = "value")
+    private function removeAllExceptValue($obj, $keyToKeep = "value"): array
     {
         foreach ($obj as $key => $value) {
             if (is_array($value)) {
@@ -47,11 +47,11 @@ class DesignSystem
      * @param array $tokens - Object of design tokens
      * @return array - Tailwind tokens
      */
-    public function createTokens($tokens)
+    public function createTokens($tokens): array
     {
         if (!is_array($tokens) && $tokens !== null) {
             echo "This is not a valid tokens object";
-            return;
+            return [];
         }
 
         $tokens = $this->objectHelper->flattenObj($this->removeAllExceptValue($tokens));

@@ -16,9 +16,9 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class ThemeTokens implements ArgumentInterface
 {
-    protected $scopeConfig;
-    protected $objectHelper;
-    protected $parserDesignSystem;
+    protected ScopeConfigInterface $scopeConfig;
+    protected ObjectHelper $objectHelper;
+    protected DesignSystem $parserDesignSystem;
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
@@ -58,7 +58,7 @@ class ThemeTokens implements ArgumentInterface
      * @param string $string
      * @return string - kebab case string
      */
-    private function kebabCase($string)
+    private function kebabCase($string): string
     {
         return strtolower(preg_replace('/([a-z0-9])([A-Z])/', '$1-$2', $string));
     }
@@ -70,7 +70,7 @@ class ThemeTokens implements ArgumentInterface
      * @param array $props
      * @return array
      */
-    public function toStyleTokens($props)
+    public function toStyleTokens($props): array
     {
         $styles = array();
         $stylesDark = array();
@@ -109,7 +109,13 @@ class ThemeTokens implements ArgumentInterface
         );
     }
 
-    private function validateJson($value)
+    /**
+     * Make sure this is valid JSON in a preformant way
+     *
+     * @param string $json
+     * @return bool
+     */
+    private function validateJson($value): bool
     {
         if (is_array($value)) {
             return false;
@@ -125,10 +131,12 @@ class ThemeTokens implements ArgumentInterface
     }
 
     /**
+     * Flatten multiline string
+     *
      * @param string $json
      * @return string
      */
-    public function flattenString($string)
+    public function flattenString($string): string
     {
         $lines = explode(PHP_EOL, $string);
         $flatString = '';
@@ -143,21 +151,19 @@ class ThemeTokens implements ArgumentInterface
     }
 
     /**
-     * @param string $input
+     * Convert JSON to CSS variables
+     *
+     * @param string $input JSON String
      * @param string $syntax options: raw, json, design_system
      * @return string
      */
-    public function convertToCSSProps($input, $syntax = "json")
+    public function convertToCSSProps($input, $syntax = "json"): string
     {
-        if ($syntax === "raw") {
-            return $this->flattenString($input);
-        }
-
         if (!$this->validateJson($input)) {
             return '';
         };
 
-        $jsonTokens = json_decode($this->flattenString($input), true);
+        $jsonTokens = json_decode($input, true);
         $tokens = $jsonTokens;
 
         if ($syntax === "design_system") {
@@ -176,12 +182,17 @@ class ThemeTokens implements ArgumentInterface
         return $styleString;
     }
 
-    public function cssProps()
+    /**
+     * @return string
+     */
+    public function cssProps(): string
     {
-        $tokens = $this->convertToCSSProps(
-            $this->getTokens(),
-            $this->getTokensSyntax()
-        );
+        $tokens = $this->flattenString($this->getTokens());
+        $syntax = $this->getTokensSyntax();
+
+        if ($syntax !== "raw") {
+            $tokens = $this->convertToCSSProps($tokens, $syntax);
+        }
 
         if ($tokens) {
             return ":root {{$tokens}}";

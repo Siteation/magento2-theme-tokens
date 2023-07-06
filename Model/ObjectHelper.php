@@ -18,7 +18,7 @@ class ObjectHelper
      * @param mixed $value - value for the deepest key
      * @param array $obj - new deep nested object
      */
-    public function createObject($keys, $value, &$obj)
+    public function createObject($keys, $value, &$obj): void
     {
         $key = array_shift($keys);
         if (!array_key_exists($key, $obj)) {
@@ -36,7 +36,7 @@ class ObjectHelper
      * @param string $separator - separator for flattened keys
      * @return array - flattened object
      */
-    function flattenObj($obj, $separator = "-")
+    function flattenObj($obj, $separator = "-"): array
     {
         $result = array();
 
