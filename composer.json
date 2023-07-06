@@ -1,6 +1,6 @@
 {
   "name": "siteation/magento2-theme-tokens",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "type": "magento2-module",
   "description": "Customize your theme with ease with Design Tokens (CSS props)",
