@@ -1,6 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
+/**
+ * @author Siteation (https://siteation.dev/)
+ * @copyright Copyright 2023 Siteation (https://siteation.dev/)
+ * @license MIT
+ */
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Escaper;
@@ -54,19 +58,23 @@ use Magento\Framework\Escaper;
     const fileUpload = document.getElementById('siteation_themetokens_file_upload');
     const fileContent = document.getElementById('siteation_themetokens_general_tokens');
     const fileContentInherit = document.getElementById('siteation_themetokens_general_tokens_inherit');
+    const themetokensMaxlength = 12000;
 
     function setPlaceholder(syntax) {
         if (syntax === "design_system") {
             return `{\n\t"color": {\n\t\t"primary": {\n\t\t\t"lighter": {\n\t\t\t\t"value": "20 80% 64%",\n\t\t\t\t"type": "color"\n\t\t\t},\n\t\t\t"default": {\n\t\t\t\t"value": "20 80% 50%",\n\t\t\t\t"type": "color"\n\t\t\t}\n\t\t}\n\t}\n}`
-        } else if (syntax === "json") {
-            return `{\n\t"color": {\n\t\t"primary": {\n\t\t\t"lighter": "hsl(20 80% 64%)",\n\t\t\t"default": "hsl(20 80% 50%)",\n\t\t\t"darker": "hsl(20 80% 34%)"\n\t\t}\n\t}\n}`
-        } else {
-            return `--color-primary-lighter: hsl(20 80% 64%);\n--color-primary: hsl(20 80% 50%);\n--color-primary-darker: hsl(20 80% 34%);`
         }
+
+        if (syntax === "json") {
+            return `{\n\t"color": {\n\t\t"primary": {\n\t\t\t"lighter": "hsl(20 80% 64%)",\n\t\t\t"default": "hsl(20 80% 50%)",\n\t\t\t"darker": "hsl(20 80% 34%)"\n\t\t}\n\t}\n}`
+        }
+
+        return `--color-primary-lighter: hsl(20 80% 64%);\n--color-primary: hsl(20 80% 50%);\n--color-primary-darker: hsl(20 80% 34%);`
     }
 
     fileContent.setAttribute('spellcheck', false);
     fileContent.setAttribute('placeholder', setPlaceholder(fileSyntax.value));
+    fileContent.setAttribute('maxlength', themetokensMaxlength);
 
     if (fileContent.disabled) {
         fileUpload.parentNode.classList.add('disabled')
@@ -74,12 +82,12 @@ use Magento\Framework\Escaper;
 
     if (fileContentInherit) {
         fileContentInherit.addEventListener('input', function(e) {
-            fileUpload.parentNode.classList.toggle('disabled', e.target.checked)
+            fileUpload.parentNode.classList.toggle('disabled', e.target.checked);
         })
     }
 
     fileSyntax.addEventListener('input', function(e) {
-        fileContent.setAttribute('placeholder', setPlaceholder(e.target.value))
+        fileContent.setAttribute('placeholder', setPlaceholder(e.target.value));
     });
 
     fileUpload.addEventListener('change', function() {
@@ -87,7 +95,7 @@ use Magento\Framework\Escaper;
         const reader = new FileReader();
         reader.onload = function(e) {
             const content = e.target.result;
-            fileContent.value = content;
+            fileContent.textContent = content.trim();
         };
         reader.readAsText(file);
         fileUpload.value = null;

@@ -55,8 +55,7 @@
                     showInStore="1"
                 >
                     <label>Tokens</label>
-                    <comment>When using any JSON syntax, make sure the input is valid JSON, to check this go to
-                        https://www.jsonschemavalidator.net/</comment>
+                    <comment>Maximum length: 12000 characters</comment>
                     <validate>validate-no-html-tags</validate>
                 </field>
                 <field
@@ -70,6 +69,8 @@
                 >
                     <label>CSS or JSON importer</label>
                     <frontend_model>Siteation\ThemeTokens\Block\Adminhtml\System\Config\ImportTokens</frontend_model>
+                    <comment>When using any JSON syntax, make sure the input is
+                        valid JSON, to check this go to https://www.jsonschemavalidator.net/</comment>
                 </field>
             </group>
         </section>

@@ -5,7 +5,11 @@
 [![Hyvä Themes Module](https://img.shields.io/badge/Hyva_Themes-Module-3df0af.svg?longCache=true&style=for-the-badge)](https://hyva.io/)
 ![License](https://img.shields.io/github/license/siteation/magento2-module-theme-tokens?color=%23234&style=for-the-badge)
 
-This Magento 2 module adds the option to set Design Tokens from the Magento backend and output this as CSS variables to the frontend.
+This Magento 2 module makes it easy to manage Design Tokens from the Magento backend.
+
+Once you have set your tokens,
+they will be output as CSS variables to the frontend,
+making it easy to style your website with consistent and reusable code.
 
 ## Installation
 
@@ -21,4 +25,8 @@ bin/magento setup:upgrade
 
 ## How to use
 
-<!-- TODO -->
+Once the module is installed, you can manage your Design Tokens from the Magento backend.
+
+1. Go to Stores > Configuration > Siteation > Design Tokens.
+2. Enter your the tokens in the desired format.
+4. Once you have set your tokens, they will be output as CSS variables to the frontend.
