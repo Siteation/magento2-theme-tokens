@@ -1,6 +1,6 @@
 {
   "name": "siteation/magento2-theme-tokens",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "type": "magento2-module",
   "description": "Customize your theme with ease with Design Tokens (CSS props)",
@@ -27,9 +27,7 @@
     "hyva-themes/magento2-theme-module": "^1.1|^1.2"
   },
   "autoload": {
-    "files": [
-      "registration.php"
-    ],
+    "files": ["registration.php"],
     "psr-4": {
       "Siteation\\ThemeTokens\\": ""
     }
