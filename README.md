@@ -27,6 +27,20 @@ bin/magento setup:upgrade
 
 Once the module is installed, you can manage your Design Tokens from the Magento backend.
 
-1. Go to Stores > Configuration > Siteation > Design Tokens.
-2. Enter your the tokens in the desired format.
-4. Once you have set your tokens, they will be output as CSS variables to the frontend.
+First make sure your styles support CSS variables
+
+![Sample config with Hyva Tailwind Config](./assets/preview-config.jpg)
+
+After this you can configure your tokens, Go to Stores > Configuration > Siteation > Design Tokens.
+Enter your the tokens in the desired format.
+
+![Sample config with Hyva Tailwind Config](./assets/backend.jpg)
+
+Once you have set your tokens, they will be output as CSS variables to the frontend.
+
+| Before       | After        |
+| ------------ | ------------ |
+| ![preview-1] | ![preview-2] |
+
+[preview-1]: ./assets/default.jpg
+[preview-2]: ./assets/with-tokens.jpg
