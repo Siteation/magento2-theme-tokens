@@ -6,5 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2024-01-16
+### Fixed
+- Hyva forced dependency
+
 ## [1.0.0] - 2023-07-26
 Initial Release 🎉
